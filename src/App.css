@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  padding: 16px;
 }
 
 .App-logo {
@@ -31,4 +32,39 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.ant-select-selection {
+  background-color: rgb(235, 235, 235);
+  border: 0;
+  padding-top: 1px;
+}
+
+.ant-select-selection--multiple .ant-select-selection__choice {
+  border-radius: 14px;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  background-color: #ffffff;
+}
+
+.ant-select-selection--multiple .ant-select-selection__choice:hover {
+  background-color: #fefefe;
+}
+
+.ant-select-selection--multiple .ant-select-selection__choice__remove {
+  margin-top: 1px;
+  right: 2px;
+}
+
+.ant-select-selection--multiple .ant-select-selection__choice__content {
+  padding-right: 4px;
+}
+
+.ant-select-selection--multiple {
+  border-radius: 24px;
+}
+
+.ant-select-focused .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active {
+  outline: 0;
+  box-shadow: none;
 }
