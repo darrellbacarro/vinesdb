@@ -1,5 +1,6 @@
-@import '~antd/dist/antd.css';
+/*@import '~antd/dist/antd.css';*/
 @import '~draft-js/dist/Draft.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
 .App {
   text-align: center;
@@ -68,4 +69,73 @@
 .ant-select-focused .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active {
   outline: 0;
   box-shadow: none;
+}
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+.trigger:hover {
+  color: #1DA57A;
+}
+
+.logo {
+  height: 32px;
+  background: #1DA57A;
+  padding: 32px;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.db-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  padding: 16px;
+}
+
+.separator {
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.separator.vertical {
+  min-width: 1px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.separator.vertical {
+  min-height: 1px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+label {
+  margin-bottom: 4px;
+}
+
+label.primary {
+  font-weight: bold;
+  color: #1DA57A;
+}
+
+.list .ant-checkbox-group-item {
+  display: block !important;
+  margin-bottom: 4px;
 }
