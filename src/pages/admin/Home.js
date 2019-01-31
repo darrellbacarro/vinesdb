@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchTool from './components/SearchTool';
 import Divider from './components/Divider';
+import Results from './components/Results';
 
 class Home extends Component {
   render() {
@@ -8,7 +9,7 @@ class Home extends Component {
       <div className="db-container">
         <SearchTool />
         <Divider />
-        <div style={{ flex: 1 }}></div>
+        <Results />
       </div>
     );
   }

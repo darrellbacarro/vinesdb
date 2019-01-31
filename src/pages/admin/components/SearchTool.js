@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { Input, Checkbox } from 'antd';
+import { Input, Checkbox, Divider, Button } from 'antd';
 
 const Search = Input.Search;
 const CheckboxGroup = Checkbox.Group;
 
 const filters = ["Family", "Genus", "Species"];
+const sort = [...filters, "Author", "Date Added", "Date Modified"];
 
 class SearchTool extends Component {
   render() {
     return (
       <div className="search-container">
-        <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 10 }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           <label className="primary">Search Database</label>
           <Search
             placeholder="Search"
@@ -18,10 +19,16 @@ class SearchTool extends Component {
             onSearch={value => console.log(value)}
           />
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <label>Filter</label>
-          <CheckboxGroup className="list" options={filters} />
-        </div>
+        <Divider orientation="left">
+          <label className="title">Filter</label>
+        </Divider>
+        <CheckboxGroup className="list" options={filters} />
+        <Divider orientation="left">
+          <label className="title">Sort by</label>
+        </Divider>
+        <CheckboxGroup className="list" options={sort} />
+        <br />
+        <Button type="primary">Search</Button>
       </div>
     );
   }

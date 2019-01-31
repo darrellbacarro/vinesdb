@@ -36,6 +36,10 @@ class Admin extends Component {
                 <Icon type="setting" theme="filled" />
                 <span>Settings</span>
               </Menu.Item>
+              <Menu.Item key="3">
+                <Icon type="info-circle" theme="filled" />
+                <span>About</span>
+              </Menu.Item>
             </Menu>
           </Sider>
           <Layout>
@@ -47,7 +51,7 @@ class Admin extends Component {
               />
             </Header>
             <Content style={{
-              margin: '24px 16px', padding: 0, background: '#fff', minHeight: 280,
+              margin: '24px 16px', padding: 0, display: 'flex', background: '#fff', minHeight: 280,
             }}
             >
               <Switch>
