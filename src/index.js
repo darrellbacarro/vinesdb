@@ -16,7 +16,7 @@ ReactDOM.render(
       <HashRouter>
         <Switch>
           <Route exact path="/" component={App} />
-          <Route exact path="/admin" component={Admin} />
+          <Route path="/admin" component={Admin} />
         </Switch>
       </HashRouter>
     </ConnectedRouter>

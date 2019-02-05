@@ -28,7 +28,7 @@ class SearchTool extends Component {
         </Divider>
         <CheckboxGroup className="list" options={sort} />
         <br />
-        <Button type="primary">Search</Button>
+        <Button type="primary" shape="round">Search</Button>
       </div>
     );
   }

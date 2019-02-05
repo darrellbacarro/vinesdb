@@ -36,6 +36,31 @@
   }
 }
 
+/* Turn on custom 8px wide scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* 1px wider than Lion. */
+  height: 8px;
+  /* This is more usable for users trying to click it. */
+  background-color: rgba(0,0,0,0);
+  -webkit-border-radius: 100px;
+}
+/* hover effect for both scrollbar area, and scrollbar 'thumb' */
+::-webkit-scrollbar:hover {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+
+/* The scrollbar 'thumb' ...that marque oval shape in a scrollbar */
+::-webkit-scrollbar-thumb {
+  /* This is the EXACT color of Mac OS scrollbars. 
+     Yes, I pulled out digital color meter */
+  background: rgba(0,0,0,0.25);
+  -webkit-border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:active {
+  background: rgba(0,0,0,0.3); /* Some darker color when you click it */
+  -webkit-border-radius: 100px;
+}
+
 .ant-select-selection {
   background-color: rgb(235, 235, 235);
   border: 0;
@@ -113,6 +138,7 @@
 .results-container {
   flex: 1;
   padding: 16px;
+  position: relative;
 }
 
 .separator {
@@ -150,4 +176,50 @@ label.primary {
 .list .ant-radio-wrapper {
   display: block !important;
   margin-bottom: 4px;
+}
+
+.grid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  grid-gap: 16px;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+.item {
+  background-color: #ffffff;
+  height: 215px;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.grid-container {
+  position: absolute;
+  width: calc(100% - 32px);
+  height: calc(100% - 80px);
+  top: 54px;
+  overflow-y: auto;
+}
+
+.ant-card {
+  border-radius: 5px !important;
+  overflow: hidden;
+}
+
+.ant-card-meta-title {
+  font-size: 14px !important;
+  margin-bottom: 4px !important;
+}
+
+.ant-card-meta-description {
+  font-size: 12px;
+}
+
+.ant-card-small .ant-card-actions li {
+  margin: 6px 0 3px 0;
+}
+
+.ant-input-search .ant-input {
+  border-radius: 25px !important;
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './Home';
 
 import { Layout, Menu, Icon } from 'antd';
+import VineDetails from './VineDetails';
 const { Header, Sider, Content } = Layout;
 
 class Admin extends Component {
@@ -55,7 +56,11 @@ class Admin extends Component {
             }}
             >
               <Switch>
-                <Route path="/" component={Home} />
+                <Route exact path="/admin" render={() => <Redirect to="/admin/vines" />} />
+                <Route exact path="/admin/vines" component={Home} />
+                <Route path="/admin/vines/:id" component={VineDetails} />
+                <Route path="/admin/edit/:id" component={Home} />
+                <Route path="/admin/new" component={Home} />
               </Switch>
             </Content>
           </Layout>
