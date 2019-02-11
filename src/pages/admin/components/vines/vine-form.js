@@ -5,7 +5,7 @@ class VineForm extends Component {
   render() {
     return (
       <div>
-        Vine Form
+        Vine
       </div>
     );
   }
