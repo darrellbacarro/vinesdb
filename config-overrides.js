@@ -10,7 +10,8 @@ module.exports = override(
     javascriptEnabled: true,
     modifyVars: {
       '@primary-color' : '#1DA57A',
-      '@font-family'   : 'Roboto'
+      '@font-family'   : 'Roboto',
+      '@error-color'   : '#e74c3c'
     }
   })
 );

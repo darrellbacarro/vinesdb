@@ -62,8 +62,8 @@
 }
 
 .ant-select-selection {
-  background-color: rgb(235, 235, 235);
-  border: 0;
+  background-color: #fefefe;
+  border: 1px solid #d9d9d9;
   padding-top: 1px;
 }
 
@@ -71,25 +71,28 @@
   border-radius: 14px;
   border: none;
   transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-  background-color: #ffffff;
+  background-color: #1DA57A;
+  color: #ffffff;
+  font-size: 13px;
 }
 
-.ant-select-selection--multiple .ant-select-selection__choice:hover {
+/* .ant-select-selection--multiple .ant-select-selection__choice:hover {
   background-color: #fefefe;
-}
+} */
 
 .ant-select-selection--multiple .ant-select-selection__choice__remove {
   margin-top: 1px;
   right: 2px;
+  color: #ffffff;
 }
 
 .ant-select-selection--multiple .ant-select-selection__choice__content {
   padding-right: 4px;
 }
 
-.ant-select-selection--multiple {
+/* .ant-select-selection--multiple {
   border-radius: 24px;
-}
+} */
 
 .ant-select-focused .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active {
   outline: 0;
@@ -222,4 +225,63 @@ label.primary {
 
 .ant-input-search .ant-input {
   border-radius: 25px !important;
+}
+
+.form-item .ant-form-item .ant-input {
+  background-color: #fefefe;
+  /* border-radius: 25px !important; */
+}
+
+.form-item label {
+  margin-left: 4px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.draft-text-input {
+  background-color: #fefefe;
+  border: 1px solid #d9d9d9;
+  line-height: 1.6;
+  padding: 4px 12px;
+  border-radius: 25px;
+  margin-top: 4px;
+  font-size: 14px;
+  transition: all 0.3s;
+  height: auto;
+}
+
+.draft-text-input.focus {
+  border-color: #3db389;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(29, 165, 122, 0.2);
+  border-right-width: 1px !important;
+}
+
+.ant-form-explain {
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.ant-form-item {
+  margin-bottom: 8px !important;
+}
+
+.ant-form-item.ant-form-item-with-help {
+  margin-bottom: 0 !important;
+}
+
+.ant-modal-footer .ant-btn-round {
+  font-size: 14px !important;
+}
+
+.tab-group {
+  margin-bottom: 6px;
+}
+
+textarea {
+  resize: none !important;
+}
+.long-modal .ant-modal-body {
+  max-height: 70vh !important;
+  overflow-y: auto !important;
 }
