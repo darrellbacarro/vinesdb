@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import { Form, Input, Select } from 'antd';
+import { Form, Input, Select, Upload, Icon, message } from 'antd';
 import CloseIcon from '@material-ui/icons/CancelRounded';
 import VineTabs from './vine-tabs';
+import SelectDropdown from './select-dropdown';
+
+function beforeUpload(file) {
+  const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
+  if (!isJPG) {
+    message.error('You can only upload JPG/PNG file!');
+  }
+  const isLt2M = file.size / 1024 / 1024 < 10;
+  if (!isLt2M) {
+    message.error('Image must smaller than 10MB!');
+  }
+  return isJPG && isLt2M;
+}
 
 class VineForm extends Component {
   componentDidMount() {
     this.props.passFormRef(this.props.form);
   }
-  checkName = (rule, value, callback) => {
-    if (!value.getCurrentContent().hasText()) {
-      callback("Name of vine is required.");
-    } else {
-      callback();
-    }
-  };
+  normFile = (e) => {
+    if (Array.isArray(e))
+      return e;
+    return e && e.fileList;
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
@@ -23,10 +34,8 @@ class VineForm extends Component {
           <Form.Item>
             {
               getFieldDecorator('vine_name', {
-                validateTrigger: false,
                 rules: [
-                  { required: true },
-                  { validator: this.checkName }
+                  { required: true }
                 ]
               })(
                 <Input autoFocus />
@@ -36,6 +45,20 @@ class VineForm extends Component {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridColumnGap: 10 }}>
           <div className="form-item">
+            <label htmlFor="vine_genus">Genus</label>
+            <Form.Item>
+              {
+                getFieldDecorator('vine_genus', {
+                  rules: [
+                    { required: true }
+                  ]
+                })(
+                  <SelectDropdown source={"genus"} />
+                )
+              }
+            </Form.Item>
+          </div>
+          <div className="form-item">
             <label htmlFor="vine_family">Family</label>
             <Form.Item>
               {
@@ -44,25 +67,43 @@ class VineForm extends Component {
                     { required: true }
                   ]
                 })(
-                  <Input />
+                  <SelectDropdown source={"families"} />
                 )
               }
             </Form.Item>
           </div>
-          <div className="form-item">
-            <label htmlFor="vine_author">Author</label>
-            <Form.Item>
-              {
-                getFieldDecorator('vine_author', {
-                  rules: [
-                    { required: true }
-                  ]
-                })(
-                  <Input />
-                )
-              }
-            </Form.Item>
-          </div>
+        </div>
+        <div className="form-item">
+          <label htmlFor="vine_author">Author</label>
+          <Form.Item>
+            {
+              getFieldDecorator('vine_author', {
+                rules: [
+                  { required: true }
+                ]
+              })(
+                <SelectDropdown source={"authors"} />
+              )
+            }
+          </Form.Item>
+        </div>
+        <div className="form-item">
+          <label htmlFor="vine_image">Images</label>
+          <Form.Item>
+            { getFieldDecorator('vine_image', {
+              valuePropName: 'fileList',
+              getValueFromEvent: this.normFile
+            })(
+              <Upload
+                listType="picture-card"
+                showUploadList={{ showPreviewIcon: false }}
+                action="http://localhost/vinesdb/upload.php"
+                beforeUpload={beforeUpload}
+              >
+                <Icon type="plus" style={{ fontSize: 32 }} />
+              </Upload>
+            ) }
+          </Form.Item>
         </div>
         <div className="form-item">
           <label htmlFor="vine_refs">References</label>
@@ -73,7 +114,7 @@ class VineForm extends Component {
                   mode="tags"
                   style={{ width: '100%' }}
                   open={false}
-                  tokenSeparators={[',',';']}
+                  tokenSeparators={[';']}
                   removeIcon={<CloseIcon fontSize="small" />}
                 ></Select>
               )
@@ -89,7 +130,7 @@ class VineForm extends Component {
                   mode="tags"
                   style={{ width: '100%' }}
                   open={false}
-                  tokenSeparators={[',',';']}
+                  tokenSeparators={[';']}
                   removeIcon={<CloseIcon fontSize="small" />}
                 ></Select>
               )
@@ -105,7 +146,7 @@ class VineForm extends Component {
                   mode="tags"
                   style={{ width: '100%' }}
                   open={false}
-                  tokenSeparators={[',',';']}
+                  tokenSeparators={[';']}
                   removeIcon={<CloseIcon fontSize="small" />}
                 ></Select>
               )

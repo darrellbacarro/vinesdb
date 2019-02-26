@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 import VineForm from './vine-form';
+import $ from 'jquery';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { loadVines } from '../../../../redux/reducers/vines';
 
 class VineDialog extends Component {
   form = null;
@@ -9,8 +14,31 @@ class VineDialog extends Component {
     visible: false
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.visible !== this.props.visible)
-      this.setState({ visible: nextProps.visible });
+    if (nextProps.visible !== this.props.visible) {
+      this.setState({ visible: nextProps.visible }, () => {
+        if (nextProps.visible) {
+          const { location } = nextProps;
+          const isNewVine = location.pathname.indexOf("new") !== -1;
+
+          const id = nextProps.match.params.id;
+          if (!isNewVine) {
+            $.ajax({
+              type: 'post',
+              url: 'http://localhost/vinesdb/vines.php',
+              data: { action: "select", id },
+              dataType: 'json',
+              success: (res) => {
+                const data = JSON.parse(res.data);
+                const species = JSON.parse(data.species_data);
+                if (this.form) {
+                  this.form.setFieldsValue({ ...species });
+                }
+              }
+            });
+          }
+        }
+      });
+    }
   }
   handleClose = () => {
     this.props.history.goBack();
@@ -22,7 +50,41 @@ class VineDialog extends Component {
     if (!!this.form) {
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
-          console.log("Received values of form: ", values);
+          const data = {
+            species_data: JSON.stringify(values),
+            species: values.vine_name,
+            genus_id: values.vine_genus,
+            family_id: values.vine_family,
+            author_id: values.author
+          };
+          
+          const { location } = this.props;
+          const isNewVine = location.pathname.indexOf("new") !== -1;
+
+          let payload = { action: "save", data };
+          
+          if (!isNewVine) {
+            const id = this.props.match.params.id;
+            payload = { action: "update", id, data };
+          }
+
+          $.ajax({
+            type: 'post',
+            url: `http://localhost/vinesdb/vines.php`,
+            data: payload,
+            dataType: 'json',
+            success: (res) => {
+              if (res.status) {
+                if (isNewVine) {
+                  message.success("Vine successfully saved.");
+                } else {
+                  message.success("Vine successfully updated.");
+                }
+                this.props.loadVines();
+                this.handleClose();
+              }
+            }
+          });
         }
       });
     }
@@ -42,6 +104,8 @@ class VineDialog extends Component {
         cancelButtonProps={{ shape: 'round' }}
         title={ isNewVine ? "Add New Vine" : "Edit Vine" }
         className="long-modal"
+        style={{ top: 10 }}
+        width={600}
       >
         <VineForm passFormRef={this.formRef} />
       </Modal>
@@ -49,4 +113,8 @@ class VineDialog extends Component {
   }
 }
 
-export default withRouter(VineDialog);
+const mapDispatchToProps = (dispatch) => (
+  bindActionCreators({ loadVines }, dispatch)
+);
+
+export default connect(null, mapDispatchToProps)(withRouter(VineDialog));

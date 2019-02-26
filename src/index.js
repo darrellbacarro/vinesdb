@@ -9,14 +9,18 @@ import { Provider } from 'react-redux';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import store, { history } from './redux/store';
+import Results from './pages/search/results';
+import VineDetails from './pages/admin/VineDetails';
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <HashRouter>
         <Switch>
-          <Route exact path="/" component={App} />
+          <Route path="/home" component={App} />
           <Route path="/admin" component={Admin} />
+          <Route path="/search/:keyword" component={Results} />
+          <Route path="/vine/:id" component={VineDetails} />
         </Switch>
       </HashRouter>
     </ConnectedRouter>
